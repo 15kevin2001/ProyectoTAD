@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Películas</title>
+</head>
+<body>
+    <h1>Listado de Películas</h1>
+    <table border="1">
+        <tr>
+            <th>Nombre</th>
+            <th>Productora</th>
+        </tr>
+        <!-- Aquí vamos a insertar las filas con los datos de las películas -->
+    </table>
+    <script>
+        // Realiza una petición AJAX para obtener los datos de la base de datos
+        fetch('/consultar')
+            .then(response => response.json())
+            .then(data => {
+                const table = document.querySelector('table');
+                data.forEach(pelicula => {
+                    const row = table.insertRow();
+                    const nombreCell = row.insertCell(0);
+                    const productoraCell = row.insertCell(1);
+
+                    nombreCell.textContent = pelicula.nombre;
+                    productoraCell.textContent = pelicula.productora;
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>
+
